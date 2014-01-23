@@ -57,8 +57,7 @@ Bundle 'webgefrickel/vim-typoscript'
 
 
 " Color themes -- one to rule them all!
-Bundle 'altercation/vim-colors-solarized'
-
+Bundle 'justonestep/jellybeans.vim'
 
 " and reset auto-filetype after loading all bundles
 filetype plugin indent on
@@ -77,6 +76,7 @@ set sidescroll=10  " smoother side-scrolling
 set sidescrolloff=5
 set scrolljump=5   " Lines to scroll when cursor leaves screen
 set scrolloff=3    " Minimum lines to keep above and below cursor
+set ttyscroll=3    " faster terminal scrolling
 
 
 set lazyredraw " Don't redraw while executing macros
@@ -84,14 +84,22 @@ set lazyredraw " Don't redraw while executing macros
 " nice Whitespace chars
 set list!
 set listchars=extends:»,precedes:«,tab:▸\ ,trail:·
+" set listchars=extends:»,precedes:«,tab:▸\ ,eol:¬,trail:·
 
 " Tabs and Whitespace
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+" set tabstop=2
+" set softtabstop=2
+" set shiftwidth=2
+" set shiftround
+" set smarttab
+" set expandtab
+" set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
 set shiftround
 set smarttab
-set expandtab
 set autoindent
 
 " use the mouse for scrolling, yeah
@@ -125,9 +133,7 @@ endif
 
 set t_Co=256
 set background=dark
-colorscheme solarized
-let g:solarized_termtrans = 1
-let g:solarized_contrast = 'high'
+color jellybeans
 
 " minor optical fix vor vim-gitgutter / syntastic / vim-signature
 highlight SignColumn ctermbg=8
@@ -231,7 +237,7 @@ nnoremap <leader>= <C-w>=
 nnoremap <leader><space> :noh<cr>
 
 " open new vertical split and change to split
-nnoremap <leader>\ <C-w>v<C-w>l
+nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>- <C-w>s<C-w>j
 
 " open a new split and edit the vimrc // easy sourcing vimrc
@@ -245,10 +251,10 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>f :%s/
 
 " dont use the arrow keys in insert mode
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 
 " but use them for usefull stuff in normal mode-- switching buffers
 nnoremap <up> :bfirst<cr>
@@ -257,14 +263,18 @@ nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
 " Bubble/indent lines using unimpaired
-nmap <C-k> [e
-nmap <C-j> ]e
-nmap <C-h> <<
-nmap <C-l> >>
-vmap <C-k> [egv
-vmap <C-j> ]egv
-vmap <C-h> <gv
-vmap <C-l> >gv
+nmap <S-up> [e
+nmap <S-down> ]e
+vmap <S-up> [egv
+vmap <S-down> ]egv
+" nmap <S-k> [e
+" nmap <S-j> ]e
+nmap <S-h> <<
+nmap <S-l> >>
+" vmap <S-k> [egv
+" vmap <S-j> ]egv
+vmap <S-h> <gv
+vmap <S-l> >gv
 
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
@@ -340,9 +350,9 @@ nnoremap <F3> :UndotreeToggle<cr>
 
 
 " TComment
-nnoremap <leader>/ :TComment<CR>
-vnoremap <leader>/ :TComment<CR>
-inoremap <leader>/ <Esc>:TComment<CR>
+nnoremap <leader>. :TComment<CR>
+vnoremap <leader>. :TComment<CR>
+inoremap <leader>. <Esc>:TComment<CR>i
 
 
 " Tabularize
@@ -439,3 +449,19 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
+" ========== On Save ==========
+" A function for stripping Whitespace when saving
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+" Don't strip whitespace for files like md,txt or csv/sql - define files here
+au BufWritePre *.{php,html,scss,css,js,ts,xml,json,inc,vim,rb} :call <SID>StripTrailingWhitespaces()

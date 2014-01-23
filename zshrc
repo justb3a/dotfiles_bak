@@ -4,6 +4,8 @@ for file in ~/dotfiles/{exports,aliases,functions}; do
 done
 unset file
 
+# Load private aliases
+source ~/.aliases
 
 # nice dircolors -- this requires installed coreutils and lscolors fallback
 autoload colors; colors;
