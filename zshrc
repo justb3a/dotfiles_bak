@@ -1,9 +1,8 @@
-# Load the functions, aliases, function etc.
+# Load the functions, aliases, git-prompt, function etc.
 for file in ~/dotfiles/{exports,aliases,functions}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
-
 
 # nice dircolors -- this requires installed coreutils and lscolors fallback
 autoload colors; colors;
