@@ -100,7 +100,6 @@ endsnippet
 
 snippet btn "HTML button"
 <button id="${1:someid}" class="${2:btn}">${3:Senden}</button>$0
-endsnippet
 
 snippet fset "Fieldset"
 <fieldset class="${1:class}"}>
@@ -357,4 +356,132 @@ snippet scrb "Default bottom modernizr load script block" b
             '/assets/js/script.min.js']
   });
 </script>
+endsnippet
+
+# special fluid stuff
+snippet f:init
+<f:layout name="Default" />
+<f:section name="main">
+
+</f:section>
+endsnippet
+
+snippet f:if "HTML <f:if>"
+<f:if condition="">
+	<f:then>
+
+	</f:then>
+	<f:else>
+
+	</f:else>
+</f:if>
+endsnippet
+
+snippet f:for
+<f:for each="{}" as="">
+
+</f:for>
+endsnippet
+
+snippet f:security.ifAuthenticated
+<f:security.ifAuthenticated>
+	<f:then>
+
+	</f:then>
+	<f:else>
+
+	</f:else>
+</f:security.ifAuthenticated>
+endsnippet
+
+snippet f:security.ifHasRole
+<f:security.ifHasRole role="">
+	<f:then>
+
+	</f:then>
+	<f:else>
+
+	</f:else>
+</f:security.ifHasRole>
+endsnippet
+
+snippet f:link.page "HTML <f:link.page>"
+<f:link.page pageUID="">
+
+</f:link.page>
+endsnippet
+
+snippet f:link.external "HTML <f:link.external>"
+<f:link.external uri="" title="">
+	
+</f:link.external>
+endsnippet
+
+snippet f:comment "HTML <f:comment>"
+<f:comment>###  ###</f:comment>
+endsnippet
+
+snippet f:partial "HTML <f:render>"
+<f:render partial="" arguments="{}"/>
+endsnippet
+
+snippet f:image
+<f:image
+	src="{}"
+	alt="{}"
+	height="{}"
+	width="{}"
+	maxWidth="{}"
+	maxHeight="{}"
+	class=""
+/>
+endsnippet
+
+snippet f:translate
+{f:translate(key: '')}
+endsnippet
+
+# special kfi fluid stuff
+snippet kfi:view
+{namespace kfi=Tx_Kfilib_ViewHelpers}
+endsnippet
+
+snippet fed:view
+{namespace fed=Tx_Fed_ViewHelpers}
+endsnippet
+
+snippet vhs:view
+{namespace v=Tx_Vhs_ViewHelpers}
+endsnippet
+
+snippet v:var
+<v:var.set name="" value="" />
+endsnippet
+
+snippet v:varl
+<v:var.set name="label" value="{f:translate(key: '')}" />
+endsnippet
+
+snippet kfi:switch
+<kfi:switch value="{}">
+	<kfi:case valueArray="{0: 1}">
+	</kfi:case>
+</kfi:switch>
+endsnippet
+
+snippet kfi:caseDefault
+ <kfi:caseDefault>
+ 
+ </kfi:caseDefault>
+endsnippet
+
+snippet kfi:toString
+<f:if condition="{} == {kfi:toString(string: '')}">
+	<f:then>
+
+	</f:then>
+	<f:else>
+
+	</f:else>
+</f:if>
 endsnippet
