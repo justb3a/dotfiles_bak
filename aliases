@@ -20,12 +20,6 @@ alias root='cd ~'
 alias drop='cd ~/Dropbox && ls -al'
 alias dot='cd ~/Dotfiles && ls -al'
 alias web='cd ~/Projects && ls -al'
-alias webrtp='cd ~/Projects/rtp/'
-alias webrtpe='cd ~/Projects/rtp/src/public/typo3conf/ext/'
-alias webac='cd ~/Projects/amms/cms/'
-alias webaf='cd ~/Projects/amms/forum/'
-alias webaa='cd ~/Projects/amms/service-api/'
-alias webace='cd ~/Projects/amms/cms/src/public/typo3conf/ext/'
 
 
 # system && random usefull stuff
@@ -39,8 +33,6 @@ alias kdf='killall -kill Finder | killall -kill Dock'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias dnsflush='sudo dscacheutil -flushcache'
 alias psa="ps aux"
-alias duplicateCognitiveTrainings='mkdir flash-tmp && cd flash && for i in *; do j=`echo $i | sed "s/_aktivmitmsde//g"`; cp "$i" ../flash-tmp/"$j"; done && cd .. && mv flash-tmp/* flash && rm -R flash-tmp'
-alias rsyncppw='cd ~/Projects/ppw && rsync -Cavz --exclude-from="./.gitignore" --exclude=".git" --update * -e "ssh ppw-gateway" :/var/www/backinmotion/'
 
 
 # gnu coreutils
