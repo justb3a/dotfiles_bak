@@ -58,11 +58,17 @@ var grid = slate.operation('grid', {
 
 
 // ultrafast application-switching
-var iterm = slate.operation('focus', { 'app': 'iTerm' });
-var chrome = slate.operation('focus', { 'app': 'Google Chrome' });
-var mail = slate.operation('focus', { 'app': 'Mail' });
 var fork = slate.operation('focus', { 'app': 'ForkLift' });
-var things = slate.operation('focus', { 'app': 'Things' });
+var iterm = slate.operation("focus", { "app": "iTerm" });
+var chrome = slate.operation("focus", { "app": "Google Chrome" });
+var mail = slate.operation("focus", { "app": "Mail" });
+var itunes = slate.operation("focus", { "app": "iTunes" });
+var adium = slate.operation("focus", { "app": "Adium" });
+var dash = slate.operation("focus", { "app": "Dash" });
+var fox = slate.operation("focus", { "app": "Firefox" });
+var vim = slate.operation("focus", { "app": "MacVim" });
+var sequelpro = slate.operation("focus", { "app": "Sequel Pro" });
+var pass = slate.operation("focus", { "app": "1Password" });
 
 
 var fullscreen = slate.operation('move', {
@@ -191,18 +197,24 @@ var fullhd = slate.operation('move', {
 /* Key bindings
 ====================================================================== */
 
-var hyper = ':shift,ctrl,alt,cmd';
-var hyperModal = hyper + ',s:toggle';
+var hyper = ":ctrl,alt,cmd";
+var hyperModal = hyper + ",s:toggle";
 
 slate.bind('tab' + hyper, hint, false);
 slate.bind('g' + hyper, grid, false);
 
 // most important apps on easy accesible keys
-slate.bind('q' + hyper, iterm, false);
-slate.bind('w' + hyper, chrome, false);
-slate.bind('e' + hyper, mail, false);
-slate.bind('r' + hyper, fork, false);
-slate.bind('t' + hyper, things, false);
+slate.bind("a" + hyper, adium, false);
+slate.bind("c" + hyper, chrome, false);
+slate.bind("d" + hyper, dash, false);
+slate.bind('f' + hyper, fork, false);
+slate.bind("i" + hyper, itunes, false);
+slate.bind("m" + hyper, mail, false);
+slate.bind("p" + hyper, pass, false);
+slate.bind("q" + hyper, sequelpro, false);
+slate.bind("t" + hyper, iterm, false);
+slate.bind("v" + hyper, vim, false);
+slate.bind("x" + hyper, fox, false);
 
 // movements in modal mode with m
 slate.bind('h' + hyperModal, lefthalf, false);
@@ -213,6 +225,7 @@ slate.bind('1' + hyperModal, mobile, false);
 slate.bind('2' + hyperModal, tablet, false);
 slate.bind('3' + hyperModal, desktop, false);
 slate.bind('4' + hyperModal, fullhd, false);
+
 
 slate.bind('space' + hyperModal, fullscreen, false);
 slate.bind('f' + hyperModal, fullheight, false);
