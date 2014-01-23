@@ -1,6 +1,6 @@
 [submodule "zsh/pure"]
 	path = zsh/pure
-	url = https://github.com/sindresorhus/pure.git
+	url = https://github.com/justonestep/pure.git
 [submodule "zsh/dircolors-solarized"]
 	path = zsh/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
