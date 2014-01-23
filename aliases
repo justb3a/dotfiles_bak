@@ -13,10 +13,34 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+#
+# often used folder shortcuts
+alias root='cd ~'
+alias drop='cd ~/Dropbox && ls -al'
+alias dot='cd ~/Dotfiles && ls -al'
+alias web='cd ~/Projects && ls -al'
+alias webrtp='cd ~/Projects/rtp/'
+alias webrtpe='cd ~/Projects/rtp/src/public/typo3conf/ext/'
+alias webac='cd ~/Projects/amms/cms/'
+alias webaf='cd ~/Projects/amms/forum/'
+alias webaa='cd ~/Projects/amms/service-api/'
+alias webace='cd ~/Projects/amms/cms/src/public/typo3conf/ext/'
+
+
+# system && random usefull stuff
 alias e='exit'
 alias md='mkdir -p'
-alias rd=rmdir
+alias rd='rmdir'
 alias d='dirs -v | head -10'
+alias cl='clear'
+alias kdf='killall -kill Finder | killall -kill Dock'
+# alias rmDS='find * -name .DS_Store | xargs rm -r'
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias dnsflush='sudo dscacheutil -flushcache'
+alias psa="ps aux"
+alias duplicateCognitiveTrainings='mkdir flash-tmp && cd flash && for i in *; do j=`echo $i | sed "s/_aktivmitmsde//g"`; cp "$i" ../flash-tmp/"$j"; done && cd .. && mv flash-tmp/* flash && rm -R flash-tmp'
+alias rsyncppw='cd ~/Projects/ppw && rsync -Cavz --exclude-from="./.gitignore" --exclude=".git" --update * -e "ssh ppw-gateway" :/var/www/backinmotion/'
 
 
 # gnu coreutils
@@ -27,10 +51,9 @@ alias l='gls -al --color=auto'
 # Gitty gitgit
 alias g="git"
 alias gst="git status"
-alias ggpl='git pull origin $(current_branch)'
-alias ggps='git push origin $(current_branch)'
-alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
-alias gitrm='git rm $(git ls-files --deleted)'
+alias gpl='git pull origin $(current_branch)'
+alias gps='git push origin $(current_branch)'
+alias grm='git rm $(git ls-files --deleted)'
 alias gsmu='git submodule init && git submodule update'
 alias gsvn='git checkout master && git svn fetch && git merge dev && git svn rebase && git svn dcommit'
 alias gmo='$EDITOR $(git ls-files -m)'
@@ -44,12 +67,17 @@ alias mysqlstop='mysql.server stop'
 alias dev='apachestart && mysqlstart'
 alias devs='apachestop && mysqlstop'
 alias devr='devs && dev'
+alias apacherm='sudo launchctl remove org.apache.httpd && sudo launchctl list | grep apache'
 
 
 # grunt
 alias gr='grunt'
 alias grw='grunt watch'
 alias grd='grunt deploy'
+alias grfe='grunt fe_build'
+alias grdbc='grunt create_migration'
+alias grdbcs='script/data_migration/datamigration.php --config=config/db.ini'
+alias grdbm='grunt migrate'
 
 
 # tmux
@@ -78,19 +106,8 @@ alias vu='vagrant up'
 alias vr='vagrant reload'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
-
-
-# often used folder shortcuts
-alias drop='cd ~/Dropbox && ls -al'
-alias web='cd ~/Sites && ls -al'
-alias rep='cd ~/Repositories && ls -al'
-alias dot='cd ~/Dotfiles && ls -al'
-
-
-# random usefull stuff
-alias dnsflush='sudo dscacheutil -flushcache'
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias psa="ps aux"
+alias vs='vagrant status'
+alias vd='vagrant destroy'
 
 
 # imagemagick downsampling shortcuts (c&p retina folder, run, done!)
@@ -101,4 +118,30 @@ alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter Lanczo
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 
 
+# compass
+alias c='compass'
+alias cw='compass watch'
+alias cc='compass compile --force'
+
+
+# phake
+alias p='phake'
+alias pb='phake build'
+alias pdbc='phake db:create_migration'
+alias pdbm='phake db:migrate'
+
+
+# make
+alias mh='make html'
+
+
+# capistrano
+alias cdd='bundle exec cap development deploy'
+alias csd='bundle exec cap staging deploy'
+alias cpd='bundle exec cap production deploy'
+alias cpdp='bundle exec cap production deploy:pending'
+
+
+# brew
+alias b=brew
 
