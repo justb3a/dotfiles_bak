@@ -59,7 +59,7 @@ alias mysqlstop='mysql.server stop'
 alias dev='apachestart && mysqlstart'
 alias devs='apachestop && mysqlstop'
 alias devr='devs && dev'
-alias apacherm='sudo launchctl remove org.apache.httpd && sudo launchctl list | grep apache'
+alias devinitial='sudo launchctl remove org.apache.httpd && sudo launchctl list | grep apache && devr'
 
 
 # grunt

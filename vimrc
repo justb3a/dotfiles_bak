@@ -267,14 +267,15 @@ nmap <S-up> [e
 nmap <S-down> ]e
 vmap <S-up> [egv
 vmap <S-down> ]egv
-" nmap <S-k> [e
-" nmap <S-j> ]e
-nmap <S-h> <<
-nmap <S-l> >>
-" vmap <S-k> [egv
-" vmap <S-j> ]egv
-vmap <S-h> <gv
-vmap <S-l> >gv
+
+
+" in/outdent Keymappings
+nmap <S-left> <<
+nmap <S-right> >>
+imap <S-left> <Esc><<i
+imap <S-right> <Esc>>>i
+vmap <S-left> <gv
+vmap <S-right> >gv
 
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
