@@ -3,7 +3,7 @@
 This is a collection of my dotfiles.
 
 ```
-git clone git://github.com/webgefrickel/dotfiles ~/dotfiles
+git clone git://github.com/justonestep/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./install/_install.sh
 ```
@@ -29,3 +29,5 @@ installed via vundle - for a list of the plugins see vimrc.
 
 To get things to work properly you first have to install
 vundle - see the instructions here: [vundle](https://github.com/gmarik/vundle)
+add in /etc/shells `/usr/local/bin/zsh`
+run in vim `:BundleInstall`
