@@ -40,6 +40,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/AutoComplPop'
 
 
 " Additional syntaxes
@@ -237,12 +238,15 @@ nnoremap <leader>= <C-w>=
 nnoremap <leader><space> :noh<cr>
 
 " open new vertical split and change to split
-nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>, <C-w>v<C-w>l
 nnoremap <leader>- <C-w>s<C-w>j
 
 " open a new split and edit the vimrc // easy sourcing vimrc
 nnoremap <leader>ve <C-w>v<C-w>l :e ~/.vimrc<cr>
 nnoremap <leader>vs :source ~/.vimrc<cr>
+
+" open a new split and edit snippets
+nnoremap <leader>se <C-w>v<C-w>l :e ~/Documents/01_snippets<cr>
 
 " Opens an edit command with the path of the currently edited file filled in
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -443,6 +447,7 @@ au BufNewFile,BufRead *.{json,js,css,scss,html} set iskeyword-=_
 " Syntaxes for other files
 au BufNewFile,BufRead Phakefile set ft=php
 au BufNewFile,BufRead *.twig set ft=html.twig
+au BufNewFile,BufRead *.txt set ft=typoscript
 
 " Remember last location/cursor in file
 if has("autocmd")
