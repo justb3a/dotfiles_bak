@@ -42,6 +42,7 @@ alias l='gls -al --color=auto'
 
 # Gitty gitgit
 alias g="git"
+alias gf="git-flow"
 alias gst="git status"
 alias gpl='git pull origin $(current_branch)'
 alias gps='git push origin $(current_branch)'
