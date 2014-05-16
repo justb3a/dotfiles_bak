@@ -54,6 +54,8 @@
 	ffs = flow feature start
 	fff = flow feature finish
 
+	url = config --get remote.origin.url
+
   unst = reset HEAD
   hist = log --pretty=format:\"%h | %ad | %an | %s%d \" --graph --date=local
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
