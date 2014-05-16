@@ -9,6 +9,8 @@
 *.gif
 *.png
 *.ico
+*.sql
 _srcs
 node_modules
 .sass-cache
+migration*.php

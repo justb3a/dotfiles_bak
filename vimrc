@@ -40,7 +40,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'vim-scripts/AutoComplPop'
+" Bundle 'vim-scripts/AutoComplPop'
 
 
 " Additional syntaxes
@@ -50,11 +50,12 @@ Bundle 'hail2u/vim-css3-syntax'
 Bundle 'juvenn/mustache.vim'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'spf13/PIV'
+" Bundle 'spf13/PIV'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'webgefrickel/vim-typoscript'
+Bundle 'joshtronic/php.vim'
 
 
 " Color themes -- one to rule them all!
@@ -272,6 +273,9 @@ nmap <S-down> ]e
 vmap <S-up> [egv
 vmap <S-down> ]egv
 
+" Move line(s) using j k
+nnoremap <leader>mj :m'>+<CR>==
+nnoremap <leader>mk :m-2<CR>==
 
 " in/outdent Keymappings
 nmap <S-left> <<
@@ -441,7 +445,7 @@ autocmd BufRead,BufNewFile *.{md|rst|txt} setlocal spell
 " add the dash to keywords -- makes better css/js/html search
 " do this for specific files only (not in php/rb e.g.)
 au BufNewFile,BufRead *.{json,js,css,scss,html} set iskeyword+=-
-au BufNewFile,BufRead *.{json,js,css,scss,html} set iskeyword-=_
+au BufNewFile,BufRead *.{json,js,css,scss,html} set iskeyword+=_
 
 
 " Syntaxes for other files
