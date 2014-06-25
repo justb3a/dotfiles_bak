@@ -40,8 +40,8 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/Unicode-RST-Tables'
 " Bundle 'vim-scripts/AutoComplPop'
-
 
 " Additional syntaxes
 Bundle 'beyondwords/vim-twig'
