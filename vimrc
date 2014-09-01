@@ -89,17 +89,11 @@ set listchars=extends:»,precedes:«,tab:▸\ ,trail:·
 " set listchars=extends:»,precedes:«,tab:▸\ ,eol:¬,trail:·
 
 " Tabs and Whitespace
-" set tabstop=2
-" set softtabstop=2
-" set shiftwidth=2
-" set shiftround
-" set smarttab
-" set expandtab
-" set autoindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
+set fileformat=unix
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 set shiftround
 set smarttab
 set autoindent
@@ -450,6 +444,8 @@ au BufNewFile,BufRead *.{json,js,css,scss,html} set iskeyword+=_
 
 " Syntaxes for other files
 au BufNewFile,BufRead Phakefile set ft=php
+au BufNewFile,BufRead *.module set ft=php
+au BufNewFile,BufRead *.install set ft=php
 au BufNewFile,BufRead *.twig set ft=html.twig
 au BufNewFile,BufRead *.txt set ft=typoscript
 

@@ -136,7 +136,7 @@ endsnippet
 
 snippet cls "Class declaration template" !b
 /**
- * Class ${1:`!p snip.rv=snip.fn.capitalize().split('.')[0]`} 
+ * Class ${1:`!p snip.rv=snip.fn.capitalize().split('.')[0]`}
  */
 class $1 {
     public function ${3:__construct}(${4:$options}) {
@@ -191,4 +191,17 @@ endsnippet
 
 snippet assign "assign"
 $this->view->assign('', );
+endsnippet
+
+snippet tdebug "tdebug"
+\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump();
+exit;
+endsnippet
+
+snippet tdebug47 "tdebug47"
+Tx_Extbase_Utility_Debugger::var_dump();
+endsnippet
+
+snippet tdebug46 "tdebug46"
+t3lib_utility_Debug::debug();
 endsnippet

@@ -133,10 +133,14 @@ alias mh='make html'
 
 
 # capistrano
+alias cap='bundle exec cap'
 alias cdd='bundle exec cap develop deploy'
 alias csd='bundle exec cap staging deploy'
 alias cpd='bundle exec cap production deploy'
 alias cpdp='bundle exec cap production deploy:pending'
+alias csdbi='bundle exec cap staging db:import'
+alias csdbe='bundle exec cap staging db:export'
+alias csdbd='bundle exec cap staging db:fetch_dump'
 
 
 # brew
