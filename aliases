@@ -144,5 +144,7 @@ alias csdbd='bundle exec cap staging db:fetch_dump'
 
 
 # brew
-alias b=brew
+alias b='brew'
 
+# sourcetree
+alias stree='open -a SourceTree'
