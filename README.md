@@ -32,3 +32,17 @@ vundle - see the instructions here: [vundle](https://github.com/gmarik/vundle)
 
 add in /etc/shells `/usr/local/bin/zsh`
 and run in vim `:BundleInstall`
+
+## MAKE
+
+### sortpictures
+
+Sorts pictures in several folders automatically by creation date.
+
+![screenshot](screens/make-sortpictures.png)
+
+Please use `make sortpictures` to start sorting.  
+Optional you can pass several arguments:
+
+* **path** to specify the folder containing the pictures (important: add an ending slash)
+* **FORMAT** in terse form, the default format will be \`%Y%m%d\`"
