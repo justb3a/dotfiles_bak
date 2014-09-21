@@ -26,23 +26,37 @@
   untracked = cyan
 
 [alias]
-  git = !git
-  st = status
-  cm = commit
-  co = checkout
-  br = branch -a
-  ps = push
-  pl = pull
-  mg = merge
-  rbc = rebase --continue
-  ffs = flow feature start
-  fff = flow feature finish
-  fi = flow init
+	st = status
+	a = add -A
+	cm = commit -m
+	co = checkout
+	br = branch -a
+	ps = push
+	pl = pull
+	mg = merge --no-ff
+	mgt = mergetool
+	c = commit
+	r = rebase
+	fac = push origin refac
+	rs = reset
+	rss = reset --soft HEAD~1
+	rsh = reset HEAD --hard
+	unst = reset HEAD
+	s = stash
+	sp = stash pop
+	mgr = merge -s recursive -X theirs
+	su = submodule update
+	df = diff --color
+	dfs = diff --staged
+	dh = diff --color HEAD@{1}
+
+	fi = flow init
+	ffs = flow feature start
+	fff = flow feature finish
+
+	url = config --get remote.origin.url
+
   unst = reset HEAD
-  hub = push origin master
-  fac = push origin refac
-  subup = submodule foreach git pull
-  rs = reset HEAD --hard
   hist = log --pretty=format:\"%h | %ad | %an | %s%d \" --graph --date=local
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -57,3 +71,12 @@
 [mergetool]
   prompt = false
   keepBackup = false
+
+[push]
+	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/tabeadavid/Library/Application Support/SourceTree/SourceTree 1.7.4/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

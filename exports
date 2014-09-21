@@ -23,8 +23,8 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 export COPYFILE_DISABLE=true
 
 # editor
-export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-export VISUAL="/Applications/MacVim.app/Contents/MacOS/Vim"
+export EDITOR="/usr/local/Cellar/macvim/7.4-73/MacVim.app/Contents/MacOS/Vim"
+export VISUAL="/usr/local/Cellar/macvim/7.4-73/MacVim.app/Contents/MacOS/Vim"
 
 # node.js
 export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
@@ -45,4 +45,4 @@ export LESS="-R"
 
 export LC_CTYPE=$LANG
 
-export RBENV_VERSION="2.1.0"
+export RBENV_VERSION="2.1.2"

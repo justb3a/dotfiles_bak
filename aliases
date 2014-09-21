@@ -13,10 +13,26 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+#
+# often used folder shortcuts
+alias root='cd ~'
+alias drop='cd ~/Dropbox && ls -al'
+alias dot='cd ~/Dotfiles && ls -al'
+alias web='cd ~/Projects && ls -al'
+
+
+# system && random usefull stuff
 alias e='exit'
 alias md='mkdir -p'
-alias rd=rmdir
+alias rd='rmdir'
 alias d='dirs -v | head -10'
+alias cl='clear'
+alias kdf='killall -kill Finder | killall -kill Dock'
+# alias rmDS='find * -name .DS_Store | xargs rm -r'
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias dnsflush='sudo dscacheutil -flushcache'
+alias psa="ps aux"
 
 
 # gnu coreutils
@@ -26,14 +42,15 @@ alias l='gls -al --color=auto'
 
 # Gitty gitgit
 alias g="git"
+alias gf="git-flow"
 alias gst="git status"
-alias ggpl='git pull origin $(current_branch)'
-alias ggps='git push origin $(current_branch)'
-alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
-alias gitrm='git rm $(git ls-files --deleted)'
+alias gpl='git pull origin $(current_branch)'
+alias gps='git push origin $(current_branch)'
+alias grm='git rm $(git ls-files --deleted)'
 alias gsmu='git submodule init && git submodule update'
 alias gsvn='git checkout master && git svn fetch && git merge dev && git svn rebase && git svn dcommit'
 alias gmo='$EDITOR $(git ls-files -m)'
+alias gba='git branch -u origin/$(current_branch)'
 
 
 # aliases for apache and mysql
@@ -44,12 +61,18 @@ alias mysqlstop='mysql.server stop'
 alias dev='apachestart && mysqlstart'
 alias devs='apachestop && mysqlstop'
 alias devr='devs && dev'
+alias apachel='sudo launchctl list | grep apache'
+alias apacherm='sudo launchctl remove org.apache.httpd'
 
 
 # grunt
 alias gr='grunt'
 alias grw='grunt watch'
 alias grd='grunt deploy'
+alias grfe='grunt fe_build'
+alias grdbc='grunt create_migration'
+alias grdbcs='script/data_migration/datamigration.php --config=config/db.ini'
+alias grdbm='grunt migrate'
 
 
 # tmux
@@ -71,6 +94,8 @@ alias vhosts='sudo vim /usr/local/etc/apache2/extra/httpd-vhosts.conf'
 alias php55ini='vim /usr/local/etc/php/5.5/php.ini'
 alias php54ini='vim /usr/local/etc/php/5.4/php.ini'
 alias http='vim /usr/local/etc/apache2/httpd.conf'
+alias errorlog='tail -f /var/log/apache2/error.log'
+alias mycnf='sudo vim /usr/local/Cellar/mysql/5.6.17/my.cnf'
 
 
 # vagrant stuff
@@ -78,19 +103,8 @@ alias vu='vagrant up'
 alias vr='vagrant reload'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
-
-
-# often used folder shortcuts
-alias drop='cd ~/Dropbox && ls -al'
-alias web='cd ~/Sites && ls -al'
-alias rep='cd ~/Repositories && ls -al'
-alias dot='cd ~/Dotfiles && ls -al'
-
-
-# random usefull stuff
-alias dnsflush='sudo dscacheutil -flushcache'
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias psa="ps aux"
+alias vs='vagrant status'
+alias vd='vagrant destroy'
 
 
 # imagemagick downsampling shortcuts (c&p retina folder, run, done!)
@@ -101,4 +115,34 @@ alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter Lanczo
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 
 
+# compass
+alias c='compass'
+alias cw='compass watch'
+alias cc='compass compile --force'
+
+
+# phake
+alias p='phake'
+alias pb='phake build'
+alias pdbc='phake db:create_migration'
+alias pdbm='phake db:migrate'
+
+
+# make
+alias mh='make html'
+
+
+# capistrano
+alias cap='bundle exec cap'
+alias cdd='bundle exec cap develop deploy'
+alias csd='bundle exec cap staging deploy'
+alias cpd='bundle exec cap production deploy'
+alias cpdp='bundle exec cap production deploy:pending'
+alias csdbi='bundle exec cap staging db:import'
+alias csdbe='bundle exec cap staging db:export'
+alias csdbd='bundle exec cap staging db:fetch_dump'
+
+
+# brew
+alias b=brew
 

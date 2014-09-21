@@ -1,3 +1,6 @@
 .netrwhist
 yankring_history_v2.txt
 vim/bundle/
+tmux/amms*
+tmux/rtp*
+tmux/ppw*
