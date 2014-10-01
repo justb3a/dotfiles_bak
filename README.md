@@ -46,3 +46,7 @@ Optional you can pass several arguments:
 
 * **path** to specify the folder containing the pictures (important: add an ending slash)
 * **FORMAT** in terse form, the default format will be \`%Y%m%d\`
+
+## MISC
+
+* [vtop](http://parall.ax/vtop)

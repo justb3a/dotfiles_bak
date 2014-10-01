@@ -55,6 +55,7 @@
 	fff = flow feature finish
 
 	url = config --get remote.origin.url
+  seturl = remote set-url origin
 
   unst = reset HEAD
   hist = log --pretty=format:\"%h | %ad | %an | %s%d \" --graph --date=local
@@ -76,7 +77,7 @@
 	default = simple
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
