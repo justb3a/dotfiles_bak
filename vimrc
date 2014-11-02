@@ -41,6 +41,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/Unicode-RST-Tables'
+Bundle 'Shougo/neocomplete'
 " Bundle 'vim-scripts/AutoComplPop'
 
 " Additional syntaxes
@@ -471,3 +472,33 @@ endfunction
 
 " Don't strip whitespace for files like md,txt or csv/sql - define files here
 au BufWritePre *.{php,html,scss,css,js,ts,xml,json,inc,vim,rb} :call <SID>StripTrailingWhitespaces()
+
+
+
+" omnicompletion for some filetypes
+au FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+au FileType html,php,twig setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+au FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+" NEOCOMPLETE
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#auto_completion_start_length = 3
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_function()<CR>
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+function! s:neocomplete_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+  endfunction
+
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+        let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+      endif
