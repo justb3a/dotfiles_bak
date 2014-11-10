@@ -13,12 +13,12 @@ Bundle 'gmarik/vundle'
 
 " plugins
 Bundle 'Raimondi/delimitMate'
-Bundle 'SirVer/ultisnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'bling/vim-airline'
 Bundle 'chrisbra/NrrwRgn'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'edsono/vim-matchit'
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'justinmk/vim-sneak'
 Bundle 'kien/ctrlp.vim'
@@ -492,6 +492,7 @@ inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_function()<CR>
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><CR>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 function! s:neocomplete_cr_function()
