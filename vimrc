@@ -10,7 +10,6 @@ call vundle#rc()
 " load the vundle bundle of course
 Bundle 'gmarik/vundle'
 
-
 " plugins
 Bundle 'Raimondi/delimitMate'
 "Bundle 'SirVer/ultisnips'
@@ -57,7 +56,6 @@ Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'webgefrickel/vim-typoscript'
 Bundle 'joshtronic/php.vim'
-
 
 " Color themes -- one to rule them all!
 Bundle 'justonestep/jellybeans.vim'
@@ -473,8 +471,6 @@ endfunction
 " Don't strip whitespace for files like md,txt or csv/sql - define files here
 au BufWritePre *.{php,html,scss,css,js,ts,xml,json,inc,vim,rb} :call <SID>StripTrailingWhitespaces()
 
-
-
 " omnicompletion for some filetypes
 au FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,php,twig setlocal omnifunc=htmlcomplete#CompleteTags
@@ -492,7 +488,7 @@ inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_function()<CR>
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
-" inoremap <expr><CR>  neocomplete#close_popup()
+inoremap <expr><leader><CR>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 function! s:neocomplete_cr_function()
