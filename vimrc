@@ -88,7 +88,6 @@ set listchars=extends:»,precedes:«,tab:▸\ ,trail:·
 " set listchars=extends:»,precedes:«,tab:▸\ ,eol:¬,trail:·
 
 " Tabs and Whitespace
-set fileformat=unix
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
