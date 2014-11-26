@@ -12,12 +12,10 @@ Bundle 'gmarik/vundle'
 
 " plugins
 Bundle 'Raimondi/delimitMate'
-"Bundle 'SirVer/ultisnips'
 Bundle 'bling/vim-airline'
 Bundle 'chrisbra/NrrwRgn'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'edsono/vim-matchit'
-"Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'justinmk/vim-sneak'
 Bundle 'kien/ctrlp.vim'
@@ -40,8 +38,14 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/Unicode-RST-Tables'
+
+" Completions
 Bundle 'Shougo/neocomplete'
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 " Bundle 'vim-scripts/AutoComplPop'
+" Bundle 'ervandew/supertab'
+" Bundle 'SirVer/ultisnips'
 
 " Additional syntaxes
 Bundle 'beyondwords/vim-twig'
@@ -50,12 +54,12 @@ Bundle 'hail2u/vim-css3-syntax'
 Bundle 'juvenn/mustache.vim'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
-" Bundle 'spf13/PIV'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'webgefrickel/vim-typoscript'
 Bundle 'joshtronic/php.vim'
+" Bundle 'spf13/PIV'
 
 " Color themes -- one to rule them all!
 Bundle 'justonestep/jellybeans.vim'
@@ -481,20 +485,49 @@ au FileType php setlocal omnifunc=phpcomplete#CompletePHP
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#auto_completion_start_length = 3
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_function()<CR>
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><leader><CR>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 function! s:neocomplete_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-  endfunction
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
 
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-        let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-      endif
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  " let g:neocomplete#sources#omni#input_patterns.javascript = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+endif
+
+" NEOSNIPPET
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
