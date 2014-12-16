@@ -38,6 +38,9 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/Unicode-RST-Tables'
+Bundle 'justonestep/vim-rename'
+Bundle 'justonestep/vim-remove'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Completions
 Bundle 'Shougo/neocomplete'
@@ -211,7 +214,7 @@ vnoremap <C-V> v
 nnoremap j gj
 nnoremap k gk
 
-" behave - yank just like D and C
+" benhave - yank just like D and C
 nnoremap Y y$
 
 nnoremap / /\v
@@ -252,10 +255,10 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>f :%s/
 
 " dont use the arrow keys in insert mode
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " but use them for usefull stuff in normal mode-- switching buffers
 nnoremap <up> :bfirst<cr>
