@@ -19,7 +19,6 @@
 .rev
 _srcs
 tmp
-node_modules
 
 # OS or editor folders and temporary and other files
 .DS_Store
