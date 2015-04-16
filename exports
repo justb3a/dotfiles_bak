@@ -47,3 +47,7 @@ export LESS="-R"
 export LC_CTYPE=$LANG
 
 export RBENV_VERSION="2.1.2"
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/tabeadavid/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1

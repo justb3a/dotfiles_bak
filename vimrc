@@ -322,7 +322,8 @@ nnoremap <leader>s ms:%s/\s\+$//e<cr>:noh<cr>`s
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " For when you forget to sudo.. Really Write the file.
-cmap w!! w !sudo tee % >/dev/null
+" cmap w!! w !sudo tee % >/dev/null
+noremap <Leader>W :w !sudo tee % > /dev/null
 
 " Map <Leader>ff to display all lines with keyword under cursor and ask which one to jump to
 nmap <Leader>j [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
@@ -337,6 +338,7 @@ nnoremap <leader>A :Ag! <C-r><C-w><cr>
 " NERDtree
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>o :NERDTreeFind<cr>
+let NERDTreeChDirMode=2
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeWinSize=50
@@ -374,6 +376,19 @@ nmap <Leader>s, :Tabularize /,<CR>
 vmap <Leader>s, :Tabularize /,<CR>
 nmap <Leader>s<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>s<Bar> :Tabularize /<Bar><CR>
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
 
 
 " vim sneak
