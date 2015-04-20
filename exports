@@ -11,6 +11,11 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/.tmuxifier/bin:$PATH
+export PATH=$HOME/.composer/vendor/bin:$PATH
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
 
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
@@ -47,7 +52,3 @@ export LESS="-R"
 export LC_CTYPE=$LANG
 
 export RBENV_VERSION="2.1.2"
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/tabeadavid/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
