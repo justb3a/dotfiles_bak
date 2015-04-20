@@ -83,3 +83,6 @@
 	trustExitCode = true
 [http]
 	postBuffer = 157286400
+[user]
+	name = Tabea David
+	email = info@justonestep.de
