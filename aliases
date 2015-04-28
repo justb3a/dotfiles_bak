@@ -35,6 +35,16 @@ alias dnsflush='sudo dscacheutil -flushcache'
 alias psa="ps aux"
 alias sudo='sudo '
 alias dr='drush'
+alias ws='wireshell'
+
+# docker
+alias dcu='docker-compose up'
+alias dcb='docker-compose build --no-cache'
+alias dmt='docker run -ti --rm -v $(pwd):/usr/share/apps/ruby_worker apkworker_worker bundle exec ruby -Ilib:test'
+
+
+# ruby
+alias r='bundle exec ruby'
 
 
 # gnu coreutils
