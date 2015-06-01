@@ -99,7 +99,7 @@ alias upall='sysup && brewup && gemup && npmup'
 
 # easy hosts / apache / php editing
 alias hosts='sudo vim /etc/hosts'
-alias vhosts='sudo vim /usr/local/etc/apache2/2.4/extra/httpd-vhosts.confi'
+alias vhosts='sudo vim /usr/local/etc/apache2/2.4/extra/httpd-vhosts.conf'
 alias httpdf='vim /usr/local/etc/apache2/2.4/httpd.conf'
 alias php55ini='vim /usr/local/etc/php/5.5/php.ini'
 alias errorlog='tail -f /var/log/apache2/error.log'
