@@ -20,6 +20,7 @@ alias root='cd ~'
 alias drop='cd ~/Dropbox && ls -al'
 alias dot='cd ~/Dotfiles && ls -al'
 alias web='cd ~/Projects && ls -al'
+alias wire='cd ~/.composer/vendor/wireshell/wireshell'
 
 
 # system && random usefull stuff
