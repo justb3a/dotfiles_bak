@@ -32,11 +32,13 @@ Bundle 'scrooloose/syntastic'
 Bundle 'terryma/vim-expand-region'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'Rykka/riv.vim'
 Bundle 'vim-scripts/Unicode-RST-Tables'
 Bundle 'justonestep/vim-rename'
 Bundle 'justonestep/vim-remove'
@@ -343,6 +345,7 @@ let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeWinSize=50
 let NERDTreeShowHidden=1
+let NERDTreeShowLineNumbers=1
 
 
 " fugitive shortcuts (20+ increases window-height)
@@ -549,3 +552,12 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+" riv ignore tab in insert mode
+let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
+" let g:riv_ignored_nmaps = '<S-up>,<S-down>'
+" let g:riv_ignored_vmaps = '<S-up>,<S-down>'
+" let g:riv_fold_auto_update = 0
+" let g:riv_fold_level = 1
+let g:riv_disable_folding = 1
+" let g:riv_auto_fold_force = 0

@@ -97,8 +97,9 @@ bindkey "\e[F" end-of-line
 # completion in the middle of a line
 bindkey '\^i' expand-or-complete-prefix
 
-ulimit -n 16384
-ulimit -u 709
+# ulimit -n 16384
+# ulimit -u 709
 # ulimit -u 1024
 # ulimit -u 2048
-
+ulimit -n 1024
+ulimit -u 1024
