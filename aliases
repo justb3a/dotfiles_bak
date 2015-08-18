@@ -42,6 +42,7 @@ alias ws='wireshell'
 alias dcu='docker-compose up'
 alias dcb='docker-compose build --no-cache'
 alias dmt='docker run -ti --rm -v $(pwd):/usr/share/apps/ruby_worker apkworker_worker bundle exec ruby -Ilib:test'
+alias dre='bin/console server:stop && docker-compose stop && boot2docker down && boot2docker up && docker-compose up -d && bin/console server:start'
 
 
 # ruby
