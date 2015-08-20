@@ -206,6 +206,9 @@ let mapleader = ","
 nnoremap ; :
 vnoremap ; :
 
+" increase number, default tmux
+nnoremap <C-Y> <C-A>
+
 " Swap v and CTRL-V, because Block mode is more useful
 nnoremap v <C-V>
 nnoremap <C-V> v
@@ -417,6 +420,9 @@ let g:syntastic_mode_map = {
   \ 'active_filetypes': ['ruby', 'php', 'javascript'],
   \ 'passive_filetypes': ['xhtml', 'html', 'scss', 'scss.css', 'css']
   \ }
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_json_checkers = ['jsonlint']
 
 
 " CtrlP (using Ag)
