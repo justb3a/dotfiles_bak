@@ -6,7 +6,6 @@ alias vd='vimdiff'
 alias diff='vimdiff'
 alias vf='vifm'
 
-
 # Easier navigation: .., ..., ~ and -
 alias ~="cd ~"
 alias ..='cd ..'
@@ -14,14 +13,12 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-#
 # often used folder shortcuts
 alias root='cd ~'
 alias drop='cd ~/Dropbox && ls -al'
 alias dot='cd ~/Dotfiles && ls -al'
 alias web='cd ~/Projects && ls -al'
 alias wire='cd ~/.composer/vendor/wireshell/wireshell'
-
 
 # system && random usefull stuff
 alias e='exit'
@@ -30,7 +27,6 @@ alias rd='rmdir'
 alias d='dirs -v | head -10'
 alias cl='clear'
 alias kdf='killall -kill Finder | killall -kill Dock'
-# alias rmDS='find * -name .DS_Store | xargs rm -r'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias dnsflush='sudo dscacheutil -flushcache'
 alias psa="ps aux"
@@ -44,15 +40,12 @@ alias dcb='docker-compose build --no-cache'
 alias dmt='docker run -ti --rm -v $(pwd):/usr/share/apps/ruby_worker apkworker_worker bundle exec ruby -Ilib:test'
 alias dre='bin/console server:stop && docker-compose stop && boot2docker down && boot2docker up && docker-compose up -d && bin/console server:start'
 
-
 # ruby
 alias r='bundle exec ruby'
-
 
 # gnu coreutils
 alias ls="gls -al --color=auto"
 alias l='gls -al --color=auto'
-
 
 # Gitty gitgit
 alias g="git"
@@ -66,30 +59,107 @@ alias gsvn='git checkout master && git svn fetch && git merge dev && git svn reb
 alias gmo='$EDITOR $(git ls-files -m)'
 alias gba='git branch -u origin/$(current_branch)'
 
+# brew
+alias b='brew'
 
-# aliases for apache and mysql
+function bphp53() {
+  brew unlink php54
+  brew unlink php55
+  brew unlink php56
+  brew link php53
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  devr
+}
+
+function bphp54() {
+  brew unlink php53
+  brew unlink php55
+  brew unlink php56
+  brew link php54
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  devr
+}
+
+function bphp55() {
+  brew unlink php53
+  brew unlink php54
+  brew unlink php56
+  brew link php55
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  devr
+}
+
+function bphp56() {
+  brew unlink php53
+  brew unlink php54
+  brew unlink php55
+  brew link php56
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  devr
+}
+
+# aliases for apache, nginx, php and mysql
 alias apachestart='sudo apachectl start'
 alias apachestop='sudo apachectl stop'
+alias nginxstart='sudo nginx'
+alias nginxstop='sudo nginx -s stop'
 alias mysqlstart='mysql.server start'
 alias mysqlstop='mysql.server stop'
-alias dev='apachestart && mysqlstart'
-alias devs='apachestop && mysqlstop'
-alias devr='devs && dev'
 
-# grunt
-alias gr='grunt'
-alias grw='grunt watch'
-alias grd='grunt deploy'
-alias grfe='grunt fe_build'
-alias grdbc='grunt create_migration'
-alias grdbcs='script/data_migration/datamigration.php --config=config/db.ini'
-alias grdbm='grunt migrate'
+alias deva='apachestart && mysqlstart'
+alias devsa='apachestop && mysqlstop'
+alias devra='devs && dev'
 
+function dev() {
+  if [ -z "$1" ]; then
+    # if no parameters given
+    brew services start php56
+  else
+    brew services start php5$1
+  fi
+
+  nginxstart
+  mysqlstart
+}
+
+function devs() {
+  if [ -z "$1" ]; then
+    # if no parameters given
+    brew services stop php56
+  else
+    brew services stop php5$1
+  fi
+
+  nginxstop
+  mysqlstop
+}
+
+function devr() {
+  if [ -z "$1" ]; then
+    # if no parameters given
+    devs
+    dev
+  else
+    devs $1
+    dev $1
+  fi
+}
+
+# function devu() {
+#    ulimit -n 4096
+#    nginxs
+#    php56s
+#    mysqls
+# }
+
+# PHP 5.6
+# alias php56s='sudo launchctl load -w /usr/local/Cellar/php56/5.6.14/homebrew.mxcl.php56.plist'
+# alias php56st='sudo launchctl unload -w /usr/local/Cellar/php56/5.6.14/homebrew.mxcl.php56.plist'
+# 600 chown root:admin
 
 # tmux
 alias t='tmux -u -2'
 alias ta='tmux attach'
-
 
 # all in one homebrew, gem update commands
 alias brewup='brew update && brew upgrade && brew cleanup && brew linkapps'
@@ -98,19 +168,17 @@ alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm 
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && gemup && npmup'
 
-
 # easy hosts / apache / php editing
 alias hosts='sudo vim /etc/hosts'
 alias vhosts='sudo vim /usr/local/etc/apache2/2.4/extra/httpd-vhosts.conf'
 alias httpdf='vim /usr/local/etc/apache2/2.4/httpd.conf'
 alias errorlog='tail -f /var/log/apache2/error.log'
 alias mycnf='sudo vim /usr/local/Cellar/mysql/5.6.17/my.cnf'
-alias php53ini='vim /usr/local/etc/php/5.5/php.ini'
-alias php54ini='vim /usr/local/etc/php/5.5/php.ini'
+alias php53ini='vim /usr/local/etc/php/5.3/php.ini'
+alias php54ini='vim /usr/local/etc/php/5.4/php.ini'
 alias php55ini='vim /usr/local/etc/php/5.5/php.ini'
-alias php56ini='vim /usr/local/etc/php/5.5/php.ini'
+alias php56ini='vim /usr/local/etc/php/5.6/php.ini'
 alias phpini='php -i | grep php.ini'
-
 
 # vagrant stuff
 alias vu='vagrant up'
@@ -120,31 +188,12 @@ alias vh='vagrant halt'
 alias vs='vagrant status'
 alias vd='vagrant destroy'
 
-
 # imagemagick downsampling shortcuts (c&p retina folder, run, done!)
 # http://www.imagemagick.org/Usage/filter/nicolas/#downsample
 alias png25='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
-
-
-# compass
-alias c='compass'
-alias cw='compass watch'
-alias cc='compass compile --force'
-
-
-# phake
-alias p='phake'
-alias pb='phake build'
-alias pdbc='phake db:create_migration'
-alias pdbm='phake db:migrate'
-
-
-# make
-alias mh='make html'
-
 
 # capistrano
 alias cap='bundle exec cap'
@@ -155,13 +204,5 @@ alias cpdp='bundle exec cap production deploy:pending'
 alias csdbi='bundle exec cap staging db:import'
 alias csdbe='bundle exec cap staging db:export'
 alias csdbd='bundle exec cap staging db:fetch_dump'
-
-
-# brew
-alias b='brew'
-alias bphp53='brew unlink php54 && brew unlink php55 && brew unlink php56 && brew link php53 && vim /usr/local/etc/apache2/2.4/httpd.conf'
-alias bphp54='brew unlink php53 && brew unlink php55 && brew unlink php56 && brew link php54 && vim /usr/local/etc/apache2/2.4/httpd.conf'
-alias bphp55='brew unlink php53 && brew unlink php54 && brew unlink php56 && brew link php55 && vim /usr/local/etc/apache2/2.4/httpd.conf'
-alias bphp56='brew unlink php53 && brew unlink php54 && brew unlink php55 && brew link php56 && vim /usr/local/etc/apache2/2.4/httpd.conf'
 
 alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"

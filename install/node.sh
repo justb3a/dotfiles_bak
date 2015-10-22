@@ -25,3 +25,4 @@ npm install -g npm-check-updates
 npm install -g recursive-blame
 npm install -g uglify-js
 npm install -g yo
+npm install -g caniuse-cmd
