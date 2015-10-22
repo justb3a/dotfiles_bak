@@ -7,6 +7,7 @@
   autocrlf = input
   eol = lf
   pager = less -FXRS -x2
+  fileMode = false
 
 [color]
   ui = auto

@@ -38,7 +38,41 @@ alias ws='wireshell'
 alias dcu='docker-compose up'
 alias dcb='docker-compose build --no-cache'
 alias dmt='docker run -ti --rm -v $(pwd):/usr/share/apps/ruby_worker apkworker_worker bundle exec ruby -Ilib:test'
-alias dre='bin/console server:stop && docker-compose stop && boot2docker down && boot2docker up && docker-compose up -d && bin/console server:start'
+
+function dockerstart() {
+  if [ -z "$1" ]; then
+    # if no parameters given
+    docker-machine start klb
+  else
+    docker-machine start $1
+  fi
+
+  docker-compose up -d
+  bin/console server:start
+}
+
+function dockerstop() {
+  bin/console server:stop
+  docker-compose stop
+
+  if [ -z "$1" ]; then
+    # if no parameters given
+    docker-machine stop klb
+  else
+    docker-machine stop $1
+  fi
+}
+
+function dre() {
+  if [ -z "$1" ]; then
+    # if no parameters given
+    dockerstop
+    dockerstart
+  else
+    dockerstop $1
+    dockerstart $1
+  fi
+}
 
 # ruby
 alias r='bundle exec ruby'
@@ -62,42 +96,6 @@ alias gba='git branch -u origin/$(current_branch)'
 # brew
 alias b='brew'
 
-function bphp53() {
-  brew unlink php54
-  brew unlink php55
-  brew unlink php56
-  brew link php53
-  vim /usr/local/etc/apache2/2.4/httpd.conf
-  devr
-}
-
-function bphp54() {
-  brew unlink php53
-  brew unlink php55
-  brew unlink php56
-  brew link php54
-  vim /usr/local/etc/apache2/2.4/httpd.conf
-  devr
-}
-
-function bphp55() {
-  brew unlink php53
-  brew unlink php54
-  brew unlink php56
-  brew link php55
-  vim /usr/local/etc/apache2/2.4/httpd.conf
-  devr
-}
-
-function bphp56() {
-  brew unlink php53
-  brew unlink php54
-  brew unlink php55
-  brew link php56
-  vim /usr/local/etc/apache2/2.4/httpd.conf
-  devr
-}
-
 # aliases for apache, nginx, php and mysql
 alias apachestart='sudo apachectl start'
 alias apachestop='sudo apachectl stop'
@@ -109,6 +107,59 @@ alias mysqlstop='mysql.server stop'
 alias deva='apachestart && mysqlstart'
 alias devsa='apachestop && mysqlstop'
 alias devra='devs && dev'
+
+function bphp53() {
+  brew unlink php54
+  brew unlink php55
+  brew unlink php56
+  brew link php53
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  _restartPHPs
+  dev 3
+}
+
+function bphp54() {
+  brew unlink php53
+  brew unlink php55
+  brew unlink php56
+  brew link php54
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  _restartPHPs
+  dev 4
+}
+
+function bphp55() {
+  brew unlink php53
+  brew unlink php54
+  brew unlink php56
+  brew link php55
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  _restartPHPs
+  dev 5
+}
+
+function bphp56() {
+  brew unlink php53
+  brew unlink php54
+  brew unlink php55
+  brew link php56
+  vim /usr/local/etc/apache2/2.4/httpd.conf
+  _restartPHPs
+  dev
+}
+
+function _restartPHPs() {
+  for i in {3..6}; do
+    php=$(brew services list | grep php5$i)
+    if [ "${php/started}" != "$php" ] ; then
+      brew services stop php5$i
+    fi
+  done
+
+  nginxstop
+  mysqlstop
+}
+
 
 function dev() {
   if [ -z "$1" ]; then
