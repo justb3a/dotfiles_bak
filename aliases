@@ -222,6 +222,7 @@ alias upall='sysup && brewup && gemup && npmup'
 # easy hosts / apache / php editing
 alias hosts='sudo vim /etc/hosts'
 alias vhosts='sudo vim /usr/local/etc/apache2/2.4/extra/httpd-vhosts.conf'
+alias nginxconf='cd /usr/local/etc/nginx/sites-available'
 alias httpdf='vim /usr/local/etc/apache2/2.4/httpd.conf'
 alias errorlog='tail -f /var/log/apache2/error.log'
 alias mycnf='sudo vim /usr/local/Cellar/mysql/5.6.17/my.cnf'
@@ -230,6 +231,7 @@ alias php54ini='vim /usr/local/etc/php/5.4/php.ini'
 alias php55ini='vim /usr/local/etc/php/5.5/php.ini'
 alias php56ini='vim /usr/local/etc/php/5.6/php.ini'
 alias phpini='php -i | grep php.ini'
+alias salias='source ~/dotfiles/aliases'
 
 # vagrant stuff
 alias vu='vagrant up'

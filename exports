@@ -14,7 +14,7 @@ export PATH=$HOME/.tmuxifier/bin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
 
 export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.101:2376"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
 export DOCKER_CERT_PATH="/Users/tabeadavid/.docker/machine/machines/klb"
 export DOCKER_MACHINE_NAME="klb"
 

@@ -13,10 +13,7 @@ split_h 50
 # Run commands.
 #run_cmd "top"     # runs in active pane
 #run_cmd "date" 1  # runs in pane 1
-run_cmd "gut pull origin develop" 1
-run_cmd "boot2docker up" 1
-run_cmd "docker-compose up -d" 1
-run_cmd "bin/console server:start" 1
+run_cmd "git pull origin develop" 1
 run_cmd "sudo postfix start" 1
 
 # Paste text
