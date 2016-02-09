@@ -148,8 +148,10 @@ function dockerstart() {
   if [ -z "$1" ]; then
     # if no parameters given
     docker-machine start klb
+    eval "$(docker-machine env klb)"
   else
     docker-machine start $1
+    eval "$(docker-machine env $1)"
   fi
 
   docker-compose up -d
@@ -177,4 +179,8 @@ function dre() {
     dockerstop $1
     dockerstart $1
   fi
+}
+
+function dmfixedip() {
+  echo "ifconfig eth1 $2 netmask 255.255.255.0 broadcast 192.168.99.255 up" | docker-machine ssh $1 sudo tee /var/lib/boot2docker/bootsync.sh > /dev/null
 }

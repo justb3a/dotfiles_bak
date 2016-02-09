@@ -40,8 +40,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 " Bundle 'Rykka/riv.vim'
 Bundle 'vim-scripts/Unicode-RST-Tables'
-Bundle 'justonestep/vim-rename'
-Bundle 'justonestep/vim-remove'
+" Bundle 'justonestep/vim-rename'
+" Bundle 'justonestep/vim-remove'
 Bundle 'christoomey/vim-tmux-navigator'
 
 " Completions
@@ -66,7 +66,7 @@ Bundle 'webgefrickel/vim-typoscript'
 Bundle 'joshtronic/php.vim'
 Bundle 'evanmiller/nginx-vim-syntax'
 " Bundle 'spf13/PIV'
-
+"
 " Color themes -- one to rule them all!
 Bundle 'justonestep/jellybeans.vim'
 
@@ -252,7 +252,7 @@ nnoremap <leader>ve <C-w>v<C-w>l :e ~/.vimrc<cr>
 nnoremap <leader>vs :source ~/.vimrc<cr>
 
 " open a new split and edit snippets
-nnoremap <leader>se <C-w>v<C-w>l :e ~/Documents/01_snippets<cr>
+" nnoremap <leader>se <C-w>v<C-w>l :e ~/Documents/01_snippets<cr>
 
 " Opens an edit command with the path of the currently edited file filled in
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -409,7 +409,7 @@ xmap \| <Plug>VSneakPrevious
 
 
 " ultisnips
-let g:UltiSnipsSnippetDirectories = ["snippets"]
+" let g:UltiSnipsSnippetDirectories = ["snippets"]
 
 
 " Syntastic
@@ -548,23 +548,23 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-" riv ignore tab in insert mode
-let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
-" let g:riv_ignored_nmaps = '<S-up>,<S-down>'
-" let g:riv_ignored_vmaps = '<S-up>,<S-down>'
-" let g:riv_fold_auto_update = 0
-" let g:riv_fold_level = 1
-let g:riv_disable_folding = 1
-" let g:riv_auto_fold_force = 0
+" " riv ignore tab in insert mode
+" let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
+" " let g:riv_ignored_nmaps = '<S-up>,<S-down>'
+" " let g:riv_ignored_vmaps = '<S-up>,<S-down>'
+" " let g:riv_fold_auto_update = 0
+" " let g:riv_fold_level = 1
+" let g:riv_disable_folding = 1
+" " let g:riv_auto_fold_force = 0
