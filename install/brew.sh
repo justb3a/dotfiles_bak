@@ -2,6 +2,7 @@
 
 brew tap homebrew/dupes
 brew tap josegonzalez/homebrew-php
+brew tap homebrew/services
 
 # install brew packages
 brew install curl

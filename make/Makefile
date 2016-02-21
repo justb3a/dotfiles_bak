@@ -51,7 +51,7 @@ eachpicture:
 	@for i in ${path}*; do \
 		date=`stat -f %SB -t '${FORMAT}' $$i`; \
 		type=`file --mime-type -b $$i`; \
-		if [[ "$$type" =~ image\/[a-zA-Z]* ]]; then \
+		if [[ "$$type" =~ image\/[a-zA-Z]* || "$$type" = video/quicktime ]]; then \
 			${MKDIR_P} ${path}$$date; \
 			${MV} $$i ${path}$$date; \
 		fi \

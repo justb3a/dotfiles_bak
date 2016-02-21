@@ -10,15 +10,12 @@ call vundle#rc()
 " load the vundle bundle of course
 Bundle 'gmarik/vundle'
 
-
 " plugins
 Bundle 'Raimondi/delimitMate'
-Bundle 'SirVer/ultisnips'
 Bundle 'bling/vim-airline'
 Bundle 'chrisbra/NrrwRgn'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'edsono/vim-matchit'
-Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'justinmk/vim-sneak'
 Bundle 'kien/ctrlp.vim'
@@ -35,13 +32,25 @@ Bundle 'scrooloose/syntastic'
 Bundle 'terryma/vim-expand-region'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+" Bundle 'Rykka/riv.vim'
 Bundle 'vim-scripts/Unicode-RST-Tables'
+" Bundle 'justonestep/vim-rename'
+" Bundle 'justonestep/vim-remove'
+Bundle 'christoomey/vim-tmux-navigator'
+
+" Completions
+Bundle 'Shougo/neocomplete'
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 " Bundle 'vim-scripts/AutoComplPop'
+" Bundle 'ervandew/supertab'
+" Bundle 'SirVer/ultisnips'
 
 " Additional syntaxes
 Bundle 'beyondwords/vim-twig'
@@ -50,14 +59,14 @@ Bundle 'hail2u/vim-css3-syntax'
 Bundle 'juvenn/mustache.vim'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
-" Bundle 'spf13/PIV'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'webgefrickel/vim-typoscript'
 Bundle 'joshtronic/php.vim'
-
-
+Bundle 'evanmiller/nginx-vim-syntax'
+" Bundle 'spf13/PIV'
+"
 " Color themes -- one to rule them all!
 Bundle 'justonestep/jellybeans.vim'
 
@@ -89,7 +98,6 @@ set listchars=extends:»,precedes:«,tab:▸\ ,trail:·
 " set listchars=extends:»,precedes:«,tab:▸\ ,eol:¬,trail:·
 
 " Tabs and Whitespace
-set fileformat=unix
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -199,6 +207,9 @@ let mapleader = ","
 nnoremap ; :
 vnoremap ; :
 
+" increase number, default tmux
+nnoremap <C-Y> <C-A>
+
 " Swap v and CTRL-V, because Block mode is more useful
 nnoremap v <C-V>
 nnoremap <C-V> v
@@ -209,7 +220,7 @@ vnoremap <C-V> v
 nnoremap j gj
 nnoremap k gk
 
-" behave - yank just like D and C
+" benhave - yank just like D and C
 nnoremap Y y$
 
 nnoremap / /\v
@@ -241,7 +252,7 @@ nnoremap <leader>ve <C-w>v<C-w>l :e ~/.vimrc<cr>
 nnoremap <leader>vs :source ~/.vimrc<cr>
 
 " open a new split and edit snippets
-nnoremap <leader>se <C-w>v<C-w>l :e ~/Documents/01_snippets<cr>
+" nnoremap <leader>se <C-w>v<C-w>l :e ~/Documents/01_snippets<cr>
 
 " Opens an edit command with the path of the currently edited file filled in
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -250,10 +261,10 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>f :%s/
 
 " dont use the arrow keys in insert mode
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " but use them for usefull stuff in normal mode-- switching buffers
 nnoremap <up> :bfirst<cr>
@@ -317,7 +328,8 @@ nnoremap <leader>s ms:%s/\s\+$//e<cr>:noh<cr>`s
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " For when you forget to sudo.. Really Write the file.
-cmap w!! w !sudo tee % >/dev/null
+" cmap w!! w !sudo tee % >/dev/null
+noremap <Leader>W :w !sudo tee % > /dev/null
 
 " Map <Leader>ff to display all lines with keyword under cursor and ask which one to jump to
 nmap <Leader>j [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
@@ -332,10 +344,12 @@ nnoremap <leader>A :Ag! <C-r><C-w><cr>
 " NERDtree
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>o :NERDTreeFind<cr>
+let NERDTreeChDirMode=2
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeWinSize=50
 let NERDTreeShowHidden=1
+let NERDTreeShowLineNumbers=1
 
 
 " fugitive shortcuts (20+ increases window-height)
@@ -370,6 +384,19 @@ vmap <Leader>s, :Tabularize /,<CR>
 nmap <Leader>s<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>s<Bar> :Tabularize /<Bar><CR>
 
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
 
 " vim sneak
 let g:sneak#use_ic_scs = 1
@@ -382,7 +409,7 @@ xmap \| <Plug>VSneakPrevious
 
 
 " ultisnips
-let g:UltiSnipsSnippetDirectories = ["snippets"]
+" let g:UltiSnipsSnippetDirectories = ["snippets"]
 
 
 " Syntastic
@@ -394,6 +421,9 @@ let g:syntastic_mode_map = {
   \ 'active_filetypes': ['ruby', 'php', 'javascript'],
   \ 'passive_filetypes': ['xhtml', 'html', 'scss', 'scss.css', 'css']
   \ }
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_json_checkers = ['jsonlint']
 
 
 " CtrlP (using Ag)
@@ -471,3 +501,70 @@ endfunction
 
 " Don't strip whitespace for files like md,txt or csv/sql - define files here
 au BufWritePre *.{php,html,scss,css,js,ts,xml,json,inc,vim,rb} :call <SID>StripTrailingWhitespaces()
+
+" omnicompletion for some filetypes
+au FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+au FileType html,php,twig setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+au FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+" NEOCOMPLETE
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#auto_completion_start_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_function()<CR>
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+function! s:neocomplete_cr_function()
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  " let g:neocomplete#sources#omni#input_patterns.javascript = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+endif
+
+" NEOSNIPPET
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" " riv ignore tab in insert mode
+" let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
+" " let g:riv_ignored_nmaps = '<S-up>,<S-down>'
+" " let g:riv_ignored_vmaps = '<S-up>,<S-down>'
+" " let g:riv_fold_auto_update = 0
+" " let g:riv_fold_level = 1
+" let g:riv_disable_folding = 1
+" " let g:riv_auto_fold_force = 0
